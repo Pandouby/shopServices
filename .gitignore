@@ -27,3 +27,4 @@ replay_pid*
 *.idea
 
 /docker/docker_data/
+/docker/db_data

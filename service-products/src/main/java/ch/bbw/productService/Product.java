@@ -1,4 +1,4 @@
-package ch.bbw.service1;
+package ch.bbw.productService;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,6 +15,7 @@ public class Product {
     @GeneratedValue(strategy= GenerationType.AUTO)
     public long id;
     public String name;
+    public String description;
     public double price;
 
     public Product() {

@@ -1,4 +1,4 @@
-package ch.bbw.service1;
+package ch.bbw.productService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,14 +26,16 @@ public class DBService {
         return productRepository.findById(id).get();
     }
 
-    public Product updateProduct(Product joke) {
-        if(productRepository.findById(joke.id).isPresent()) {
-            return productRepository.save(joke);
+    public Product updateProduct(Product product) {
+        if(productRepository.findById(product.id).isPresent()) {
+            return productRepository.save(product);
         }
         return null;
     }
 
     public void deleteProduct(long id) {
-        productRepository.deleteById(id);
+        if(productRepository.findById(id).isPresent()) {
+            productRepository.deleteById(id);
+        }
     }
 }

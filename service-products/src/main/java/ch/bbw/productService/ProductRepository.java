@@ -1,4 +1,4 @@
-package ch.bbw.service1;
+package ch.bbw.productService;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

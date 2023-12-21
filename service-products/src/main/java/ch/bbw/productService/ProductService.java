@@ -1,13 +1,13 @@
-package ch.bbw.service1;
+package ch.bbw.productService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Service1Application {
+public class ProductService {
 
     public static void main(String[] args) {
-        SpringApplication.run(Service1Application.class, args);
+        SpringApplication.run(ProductService.class, args);
     }
 
 }

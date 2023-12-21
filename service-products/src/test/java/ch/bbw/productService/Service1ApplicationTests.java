@@ -1,4 +1,4 @@
-package ch.bbw.service1;
+package ch.bbw.productService;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

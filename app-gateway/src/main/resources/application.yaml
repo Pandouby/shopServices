@@ -6,11 +6,15 @@ spring:
           enabled: true
           lower-case-service-id: true
       routes:
-        - id: service-01
-          uri: http://localhost:8086/api
+        - id: service-products
+          uri: http://localhost:8081/api
           predicates:
-            - Path=/first/**
-        - id: service-02
+            - Path=/products/**
+        - id: service-users
           uri: http://localhost:8082/api
           predicates:
-            - Path=/second/**
+            - Path=/users/**
+        - id: service-orders
+          uri: http://localhost:8083/api
+          predicates:
+            - Path=/orders/**
