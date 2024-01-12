@@ -1,6 +1,8 @@
 package ch.bbw.orderservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,19 +17,19 @@ public class DBService {
         this.orderRepository = orderRepository;
     }
 
-    public List<Order> getOrders() {
-        return (List<Order>)orderRepository.findAll();
+    public List<ProductOrder> getOrders() {
+        return (List<ProductOrder>)orderRepository.findAll();
     }
 
-    public Order getOrder(long id) {
+    public ProductOrder getOrder(long id) {
         return orderRepository.findById(id).get();
     }
 
-    public Order createOrder(Order order) {
+    public ProductOrder createOrder(ProductOrder order) {
         return orderRepository.save(order);
     }
 
-    public Order updateOrder(Order order) {
+    public ProductOrder updateOrder(ProductOrder order) {
         if(orderRepository.findById(order.id).isPresent()) {
             return orderRepository.save(order);
         }
@@ -37,4 +39,5 @@ public class DBService {
     public void deleteProduct(long id) {
         orderRepository.deleteById(id);
     }
+
 }

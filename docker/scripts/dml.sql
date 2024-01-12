@@ -8,7 +8,7 @@ VALUES
     ('Meth', 'Methamphetamine', 100),
     ('Dildo', 'Yves favourite item', 69.69),
     ('testProduct', 'Introducing our innovative testproduct! Designed with cutting-edge technology and precision engineering, this product is the perfect solution for your testing needs. With a sleek and modern design, it offers reliability and performance.', 100);
-INSERT INTO `Order` (order_time, user_id, product_id)
+INSERT INTO `Product_Order` (order_time, user_id, product_id)
 VALUES
     ('2023-12-07 08:46:05', 1, 3),
     ('2023-12-07 15:14:07', 2, 2),

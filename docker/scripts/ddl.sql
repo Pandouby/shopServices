@@ -17,7 +17,7 @@ CREATE TABLE `Product`
     price DOUBLE(11, 2),
     PRIMARY KEY (id)
 );
-CREATE TABLE `Order`
+CREATE TABLE `Product_Order`
 (
     id INT(11) NOT NULL AUTO_INCREMENT,
     order_time DATETIME NOT NULL,

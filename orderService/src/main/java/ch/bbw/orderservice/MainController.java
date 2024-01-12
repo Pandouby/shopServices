@@ -1,6 +1,5 @@
 package ch.bbw.orderservice;
 
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,7 +15,7 @@ public class MainController {
     private DBService dbService;
 
     @GetMapping("api/orders")
-    public ResponseEntity<List<Order>> getOrders() {
+    public ResponseEntity<List<ProductOrder>> getOrders() {
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(dbService.getOrders());
@@ -24,21 +23,21 @@ public class MainController {
     }
 
     @GetMapping("api/orders/{id}")
-    public ResponseEntity<Order> getOrders(@PathVariable int id) {
+    public ResponseEntity<ProductOrder> getOrders(@PathVariable int id) {
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(dbService.getOrder(id));
     }
 
     @PostMapping("api/orders/")
-    public ResponseEntity<Order> postOrder(@RequestBody Order order) {
+    public ResponseEntity<ProductOrder> postOrder(@RequestBody ProductOrder order) {
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(dbService.createOrder(order));
     }
 
     @PutMapping("api/orders")
-    public ResponseEntity<Order> putOrder(@RequestBody Order order) {
+    public ResponseEntity<ProductOrder> putOrder(@RequestBody ProductOrder order) {
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(dbService.updateOrder(order));
