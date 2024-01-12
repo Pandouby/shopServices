@@ -10,6 +10,8 @@ import java.util.List;
 
 @RestController
 public class MainController {
+    @Autowired
+    private KafkaProducer kafkaProducer;
 
     @Autowired
     private DBService dbService;
@@ -31,6 +33,7 @@ public class MainController {
 
     @PostMapping("api/orders/")
     public ResponseEntity<ProductOrder> postOrder(@RequestBody ProductOrder order) {
+        kafkaProducer.sendMessage("New order has been created: " + order.toString());
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(dbService.createOrder(order));
