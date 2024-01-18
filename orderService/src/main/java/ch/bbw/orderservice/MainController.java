@@ -31,7 +31,7 @@ public class MainController {
                 .body(dbService.getOrder(id));
     }
 
-    @PostMapping("api/orders/")
+    @PostMapping("api/orders")
     public ResponseEntity<ProductOrder> postOrder(@RequestBody ProductOrder order) {
         kafkaProducer.sendMessage("New order has been created: " + order.toString());
         return ResponseEntity.status(HttpStatus.OK)
