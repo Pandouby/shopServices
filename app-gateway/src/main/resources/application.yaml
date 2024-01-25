@@ -9,15 +9,15 @@ spring:
           lower-case-service-id: true
       routes:
         - id: service-products
-          uri: http://localhost:8081/api
+          uri: http://localhost:8081/product
           predicates:
             - Path=/products/**
         - id: service-users
-          uri: http://localhost:8082/api
+          uri: http://localhost:8082/user
           predicates:
             - Path=/users/**
         - id: service-orders
-          uri: http://localhost:8083/api
+          uri: http://localhost:8083/order
           predicates:
             - Path=/orders/**
 server:

@@ -12,15 +12,15 @@ import java.util.List;
 public class MainController {
     @Autowired
     private DBService dbService;
-    @GetMapping("api/users")
+    @GetMapping("user/users")
     public List<User> getUsers() {
         return dbService.getUsers();
     }
-    @DeleteMapping("api/user")
+    @DeleteMapping("user/user")
     public void deleteUser(User user) {
         dbService.deleteUser(user);
     }
-    @PostMapping("api/user")
+    @PostMapping("user/user")
     public User createUser(User user) {
         return dbService.createUser(user);
     }

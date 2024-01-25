@@ -16,14 +16,14 @@ public class MainController {
     @Autowired
     private DBService dbService;
 
-    @GetMapping("/api/orders")
+    @GetMapping("/order/orders")
     public ResponseEntity<List<ProductOrder>> getOrders() {
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(dbService.getOrders());
     }
 
-    @GetMapping("/api/orders/{id}")
+    @GetMapping("/order/orders/{id}")
     public ResponseEntity<ProductOrder> getOrders(@PathVariable int id) {
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -31,7 +31,7 @@ public class MainController {
     }
 
 
-    @PostMapping("/api/orders")
+    @PostMapping("/order/orders")
     public ResponseEntity<ProductOrder> postOrder(@RequestBody ProductOrder order) {
         kafkaProducer.sendMessage("New order has been created: " + order.toString());
         return ResponseEntity.status(HttpStatus.OK)
@@ -39,14 +39,14 @@ public class MainController {
                 .body(dbService.createOrder(order));
     }
 
-    @PutMapping("/api/orders")
+    @PutMapping("/order/orders")
     public ResponseEntity<ProductOrder> putOrder(@RequestBody ProductOrder order) {
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(dbService.updateOrder(order));
     }
 
-    @DeleteMapping("/api/orders/{id}")
+    @DeleteMapping("/order/orders/{id}")
     public ResponseEntity<String> deleteOrder(@PathVariable int id) {
         dbService.deleteProduct(id);
         return ResponseEntity.status(HttpStatus.OK)
