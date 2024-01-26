@@ -16,4 +16,8 @@ public class ProductOrder {
     public long id;
     @Column(name = "order_time", columnDefinition = "TIMESTAMP")
     public LocalDateTime orderTime;
+    @Column(name = "user_id", columnDefinition = "INT")
+    public long user_id;
+    @Column(name = "product_id", columnDefinition = "INT")
+    public long product_id;
 }
