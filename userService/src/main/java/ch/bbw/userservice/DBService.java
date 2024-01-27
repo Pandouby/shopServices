@@ -22,6 +22,11 @@ public class DBService {
         }
     }
 
+    public void deleteUser(long id) {
+        userRepository.deleteById(id);
+    }
+
+
     public User getUser(long id) {
         if (userRepository.findById(id).isPresent()) {
             return userRepository.findById(id).get();

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="de">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product List</title>
+</head>
+<body>
+<div id="main">
+    <div id="products">
+        <h2>Products</h2>
+        <ul>
+            <li>name | description | price</li>
+        </ul>
+        <div>
+            <label>
+                Name
+                <input type="text" id="productName">
+            </label>
+            <label>
+                Description
+                <input type="text" id="productDescription">
+            </label>
+            <label>
+                Price
+                <input type="number" id="productPrice">
+            </label>
+            <button onclick="postProduct()">
+                Create product
+            </button>
+        </div>
+    </div>
+    <div id="orders">
+        <h2>Orders</h2>
+        <ul>
+            <li>user_id | product_id | orderTime</li>
+        </ul>
+    </div>
+    <div id="users">
+        <h2>Users</h2>
+        <ul>
+            <li>firstname | lastname | birthdate</li>
+        </ul>
+        <div>
+            <label>
+                Firstname
+                <input type="text" id="firstname">
+            </label>
+            <label>
+                Lastname
+                <input type="text" id="lastname">
+            </label>
+            <label>
+                Birthdate
+                <input type="date" id="birthdate">
+            </label>
+            <button onclick="createUser()">
+                Create User
+            </button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    window.onload = () => {
+        fetch('http://localhost:8081/product/products', {
+            headers: {
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
+            .then(result => result.json())
+            .then((products) => {
+                const ul = document.createElement('ul');
+                const productsContainer = document.getElementById('products');
+                api_showcase.forEach(function (product) {
+                    let li = document.createElement('li');
+                    li.appendChild(document.createTextNode(product.name + " | " + product.description + " | " + product.price));
+                    let img = document.createElement('img');
+                    img.src = 'cart.png';
+                    img.style = "width: 16px";
+                    li.onclick = () => {
+                        placeOrder(product)
+                    };
+                    li.appendChild(img);
+                    ul.appendChild(li);
+                })
+                productsContainer.appendChild(ul);
+            })
+
+        fetch('http://localhost:8083/order/orders', {
+            headers: {
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
+            .then(result => result.json())
+            .then((orders) => {
+                const ul = document.createElement('ul');
+                const orderContainer = document.getElementById('orders');
+                orders.forEach(function (order) {
+                    let li = document.createElement('li');
+                    li.appendChild(document.createTextNode(order.user_id + " | " + order.product_id + " | " + order.orderTime));
+                    let img = document.createElement('img');
+                    img.src = 'remove.png';
+                    img.style = "width: 16px";
+                    img.onclick = () => {
+                        deleteOrder(order)
+                    };
+                    li.appendChild(img);
+                    ul.appendChild(li);
+                })
+                orderContainer.appendChild(ul);
+            })
+
+        fetch('http://localhost:8082/user/users', {
+            headers: {
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
+            .then(result => result.json())
+            .then((users) => {
+                console.log(users)
+                const ul = document.createElement('ul');
+                const orderContainer = document.getElementById('users');
+                users.forEach(function (user) {
+                    let li = document.createElement('li');
+                    li.appendChild(document.createTextNode(user.firstname + " | " + user.lastname + " | " + user.birthdate));
+                    let img = document.createElement('img');
+                    img.src = 'remove.png';
+                    img.style = "width: 16px";
+                    img.onclick = () => {
+                        deleteUser(user)
+                    };
+                    li.appendChild(img);
+                    ul.appendChild(li);
+                })
+                orderContainer.appendChild(ul);
+            })
+    }
+
+    function postProduct() {
+        const product = {
+            "description": document.getElementById("productDescription").value,
+            "name": document.getElementById("productDescription").value,
+            "price": parseInt(document.getElementById("productPrice").value),
+            "user": 1
+        };
+        fetch('http://localhost:8081/product/products', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(product)
+        })
+            .then(() => location.reload())
+    }
+
+    function placeOrder(product) {
+        const order = {
+            "user_id": 1,
+            "product_id": product.id,
+            "orderTime": new Date().toISOString().slice(0, 19)
+        };
+        fetch('http://localhost:8083/order/orders', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(order)
+        }).then(() => location.reload())
+    }
+
+    function deleteOrder(order) {
+        fetch('http://localhost:8083/order/orders/' + order.id, {
+            method: 'DELETE',
+            mode: 'cors'
+        }).then(() => location.reload())
+    }
+
+    function createUser() {
+        const user = {
+            "firstname": document.getElementById("firstname").value,
+            "lastname": document.getElementById("lastname").value,
+            "birthdate": document.getElementById("birthdate").value
+        };
+        fetch('http://localhost:8082/user/users', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(() => location.reload())
+    }
+
+    function deleteUser(user) {
+        fetch('http://localhost:8082/user/users/' + user.id, {
+            method: 'DELETE'
+        })
+            .then(() => location.reload())
+    }
+</script>
+<style>
+    #main {
+        width: 100%;
+        display: flex;
+    }
+
+    #main > div {
+        width: 50%;
+    }
+
+    label {
+        display: flex;
+    }
+</style>

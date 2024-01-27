@@ -5,8 +5,8 @@ VALUES
     ('Maurin', 'Schucan', '2002-07-12');
 INSERT INTO `Product` (name, description, price)
 VALUES
-    ('Meth', 'Methamphetamine', 100),
-    ('Dildo', 'Yves favourite item', 69.69),
+    ('Tastatur', 'Peripheriegerät', 100),
+    ('Krücken', 'Gehhilfe', 69.69),
     ('testProduct', 'Introducing our innovative testproduct! Designed with cutting-edge technology and precision engineering, this product is the perfect solution for your testing needs. With a sleek and modern design, it offers reliability and performance.', 100);
 INSERT INTO `Product_Order` (order_time, user_id, product_id)
 VALUES
