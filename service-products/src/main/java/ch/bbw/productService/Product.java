@@ -1,24 +1,20 @@
 package ch.bbw.productService;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Product {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     public long id;
+    @Column(name="name", columnDefinition = "string")
     public String name;
+    @Column(name = "description", columnDefinition = "string")
     public String description;
+    @Column(name = "price", columnDefinition = "float")
     public double price;
-
-    public Product() {
-
-    }
 }

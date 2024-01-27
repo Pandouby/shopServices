@@ -1,24 +1,22 @@
 package ch.bbw.userservice;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Data
-@AllArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(name = "firstname", columnDefinition = "string")
     private String firstname;
+    @Column(name = "lastname", columnDefinition = "string")
     private String lastname;
+    @Column(name = "birthdate", columnDefinition = "date")
     private Date birthdate;
 }
